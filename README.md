@@ -29,12 +29,12 @@ of the arm64-v8a `libffmpegJNI.so` SHA-256 it rebuilds. The native build, not th
 identifies a package: two builds can share an app version, and several app versions can share
 one native build.
 
-| Native build | App version (versionCode) | Distribution | Release | File | Published | Availability |
+| Native build | App version (versionCode) | Status | Release | File | Package published | Availability |
 |---|---|---|---|---|---|---|
-| **b2b70aff** | 1.0.0 (1) | **Google Play** | [galify-1.0.0-build1-lib-b2b70aff](https://github.com/muhammad-ahsan-m/galify-lgpl-sources/releases/tag/galify-1.0.0-build1-lib-b2b70aff) | `galify-1.0.0-build1-lib-b2b70aff-lgpl.zip` | 2026-11-11 | Available; at least 3 years after this build was last distributed |
+| **b2b70aff** | 1.0.0 (1) | **Prepared for Google Play distribution** | [galify-1.0.0-build1-lib-b2b70aff](https://github.com/muhammad-ahsan-m/galify-lgpl-sources/releases/tag/galify-1.0.0-build1-lib-b2b70aff) | `galify-1.0.0-build1-lib-b2b70aff-lgpl.zip` | 2026-11-11 | Available; at least 3 years after this build was last distributed |
 | 96d9f764 | 1.0.0 (1) | Earlier build of 7 October 2026 | [galify-1.0.0-build1](https://github.com/muhammad-ahsan-m/galify-lgpl-sources/releases/tag/galify-1.0.0-build1) | `galify-1.0.0-build1-lgpl.zip` | 2026-10-07 | Available; at least 3 years after this build was last distributed |
 
-### Native build b2b70aff - Galify 1.0.0 (versionCode 1), Google Play
+### Native build b2b70aff - Galify 1.0.0 (versionCode 1), prepared for Google Play distribution
 
 * Release: [galify-1.0.0-build1-lib-b2b70aff](https://github.com/muhammad-ahsan-m/galify-lgpl-sources/releases/tag/galify-1.0.0-build1-lib-b2b70aff)
 * File: `galify-1.0.0-build1-lib-b2b70aff-lgpl.zip` (71,148,349 bytes)
@@ -63,8 +63,8 @@ The exact APK and AAB each package belongs to are listed in that package's `bina
 
 ## Which package is mine?
 
-1. If you installed **Galify 1.0.0 (versionCode 1) from Google Play**, use native build
-   **b2b70aff**.
+1. Galify 1.0.0 (versionCode 1) as prepared for Google Play distribution uses native build
+   **b2b70aff**. Once it is available on Google Play, installs from Play use this package.
 2. To check any installation: on a computer with `adb`, run
    `adb shell pm path com.ahsansoftware.galify`, pull the APK for your device's ABI (a Play
    install lists a `split_config.<abi>.apk`), and compute the SHA-256 of its
@@ -99,11 +99,12 @@ Inside each zip, `README.txt` explains the layout and the relinking steps:
 * `notices/` - the licence texts Galify shows under Settings > About > Open source licences.
 * `MANIFEST.sha256` - the checksum of every file in the package.
 
-**Build paths:** the object files, static libraries and the shipped `libffmpegJNI.so` contain
-the directory paths of the machine they were built on (in debug and source-file information
-recorded by the compiler). They are kept unchanged, because removing them would change the
-binaries and break the byte-for-byte match between the kit and the shipped library. They have no
-effect on relinking.
+**Build paths:** the shipped `libffmpegJNI.so` contains source-file paths from the machine it
+was built on, embedded by the compiler in assertion and log messages of some bundled libraries
+(codec2, SVT-JPEG-XS, libopenmpt, GPR). It has no debug sections. The kit's object files and
+static libraries also carry build directories in their compiler-recorded debug information. They
+are kept unchanged, because removing them would change the binaries and break the byte-for-byte
+match between the kit and the shipped library. They have no effect on relinking.
 
 ## Your rights
 
